@@ -11,6 +11,7 @@ public class User {
 	private String photo;
 	private String region;
 	private String autograph;
+	private String login_name;
 	
 	public String getId() {
 		return id;
@@ -54,30 +55,23 @@ public class User {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-	
-	public User() {
-		
+	public String getLogin_name() {
+		return login_name;
 	}
-		
-	
-	public User(String id, String username, Integer age, Integer gender,
-			String photo, String region, String autograph) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.age = age;
-		this.gender = gender;
-		this.photo = photo;
-		this.region = region;
-		this.autograph = autograph;
+	public void setLogin_name(String login_name) {
+		this.login_name = login_name;
 	}
 	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", age=" + age
 				+ ", gender=" + gender + ", photo=" + photo + ", region="
-				+ region + ", autograph=" + autograph + "]";
+				+ region + ", autograph=" + autograph + ", login_name="
+				+ login_name + "]";
 	}
+	
+
+		
 	
 	
 	
