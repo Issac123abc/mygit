@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wjx.dao.MoudleMapper">
+        
+    <insert id="addMoudle" parameterType="com.wjx.entity.Moudle">
+    	insert into moudle values(#{id},#{title},#{content},#{images},#{creat_time})
+    </insert>
+    
+    <resultMap type="com.wjx.entity.Moudle" id="moudleList"></resultMap>
+	<select id="getMoudleList" resultMap="moudleList">
+		select * from moudle order by creat_time asc
+	</select>
+	
+   
+</mapper>

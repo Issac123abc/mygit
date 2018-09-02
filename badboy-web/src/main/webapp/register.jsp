@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +12,10 @@
 	input{height:20px;}
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="${ctx }/js/layer/layer.js"></script>
 <script type="text/javascript">
+	var submit=false;
+	
 	function check(){
 		var p1=$('#password').val();
 		var p2=$('#password2').val();
@@ -19,11 +24,11 @@
 		//var login_name=$('#login_name').val();
 		
 		if(phone==''||phone==null){
-			alert("手机号码不能为空！");
+			layer.alert("手机号码不能为空！", {offset: '150px'});
 			return false;
 		}
 		if(email==''||email==null){
-			alert("电子邮箱不能为空！");
+			layer.alert("电子邮箱不能为空！", {offset: '150px'});
 			return false;
 		}
 		/* if(login_name==''||login_name==null){
@@ -31,22 +36,26 @@
 			return false;
 		} */
 		if(p1==''||p1==null){
-			alert("密码不能为空！");
+			layer.alert("密码不能为空！", {offset: '150px'});
 			return false;
 		}
 		if(p1!=p2){
-			alert("密码不一致！");	
+			layer.alert("密码不一致！", {offset: '150px'});
 			return false;					
 		}
-		return true;
+		if(!submit){
+			submit=true;
+			return submit;
+		}
+		return false;
 	}
 		
 	
 </script>
 </head>
 <body>
-	<div style="width:80%; margin:120px auto;">
-		<form action="register" method="post" onsubmit="return check();">
+	<div style="width:80%; margin:150px auto;">
+		<form action="user/register" method="post" onsubmit="return check();">
 			<table style="width:280px; margin:0px auto;">
 				<tr>
 					<td style="width:90px; height:30px;">手机号码：</td>

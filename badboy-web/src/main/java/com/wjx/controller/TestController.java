@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.wjx.entity.Moudle;
 import com.wjx.entity.User;
 import com.wjx.service.UserService;
 
 @Controller
 public class TestController {
+	
 	
 	@Autowired
 	private UserService userService;
@@ -25,4 +27,5 @@ public class TestController {
 		System.out.println("user:"+user);
 		return "success";
 	}
+	
 }
