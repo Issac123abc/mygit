@@ -4,8 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.wjx.dao.UserMapper">
-    <select id="findById" parameterType="Integer" resultType="com.wjx.entity.User">
-        select * from user where id=#{id}
+    <select id="findById" parameterType="String" resultType="com.wjx.entity.User">
+        select username,age,gender,photo,region,autograph from user where id=#{id}
     </select>
         
     <insert id="addReg" parameterType="com.wjx.entity.Register">

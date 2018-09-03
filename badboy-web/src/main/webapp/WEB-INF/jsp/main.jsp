@@ -12,7 +12,12 @@
 </style>
 </head>
 <body style="width:80%;  margin:0px auto;">
-	<div id="top" style="width:100%; height:35px;"></div>
+	<div id="top" style="width:100%; height:35px; position:relative;">
+		<div style="position:absolute; left:500px; height:30px; line-height:35px;">
+			<span id="name">${requestScope.user.username }</span>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a style="color:gray;" href="${ctx }/user/logout">退 出</a>
+		</div>
+	</div>
 	<div id="head" style="width:100%; height:450px;">
 		<img alt="" style="width:100%; height:100%;" src="${ctx}/images/001.jpg">
 

@@ -4,7 +4,7 @@ import com.wjx.entity.Register;
 import com.wjx.entity.User;
 
 public interface UserService {
-	User getUserById(Integer id);
+	User getUserById(String id);
 	
 	void addRegs(Register register);
 	

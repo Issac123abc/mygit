@@ -8,17 +8,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.http.Cookie;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+
 
 import com.wjx.entity.Moudle;
 import com.wjx.entity.Register;
@@ -59,10 +57,13 @@ public class UserController {
 	
 	@RequestMapping("/main")
 	public String main(Map<String,Object> map){
-		HttpSession session=request.getSession();
-		System.out.println("access_token:"+session.getAttribute("access_token"));
 		List<Moudle> moudleList=moudleService.getMoudleLists();
+		HttpSession session=request.getSession();
+		Register reg=(Register) session.getAttribute("user");
+		String user_id=reg.getUser_id();
+		User user=userService.getUserById(user_id);
 		map.put("moudles", moudleList);
+		map.put("user", user);
 		return MAIN;
 	}
 	
@@ -88,46 +89,25 @@ public class UserController {
 	}
 	
 	@RequestMapping("/login")
-	public String login(@RequestParam("name") String name, @RequestParam("password") String password, Map<String,String> map,
-			HttpServletResponse response){		
+	public String login(@RequestParam(value="name",required=false) String name, @RequestParam(value="password",required=false) String password, Map<String,String> map){		
 		Register exist=userService.checkLogins(name, password);
 		if(exist!=null){
-			String uuid=UUID.randomUUID().toString();
 			HttpSession session=request.getSession();
-			session.setAttribute("access_token", uuid);
-			Cookie cookie=new Cookie("access_token", uuid);
-			response.addCookie(cookie);
-			System.out.println("sessionId:"+session.getId());
-			System.out.println("uuid:"+uuid);
+			session.setAttribute("user", exist);			
 			return "redirect:/user/main";
 		}else{
 			map.put("msg", "error");
-			return "forward:/login.jsp";
-		}
-		
-		
+			return "login";
+		}	
 	}
 	
-	@ResponseBody
-	@RequestMapping("/existReg")
-	public Object existReg(@RequestParam("name") String name, @RequestParam("password") String password){
-		Register reg=userService.checkRegs(name);
-		Map<String,String> map =new HashMap<String,String>();
-		if(null==reg){   //Ã»ÓÐ×¢²á
-			map.put("obj", "regError");
-			return map;
-		}else{      //ÃÜÂë´íÎó
-			Register regLogin=userService.checkLogins(name, password);
-			if(null==regLogin){
-				map.put("obj", "pwError");
-				return map;
-			}else{		//ÔÊÐíµÇÂ¼		
-				return null;
-			}
-			
-		}
-					
+	@RequestMapping("/logout")
+	public String logout(){
+		HttpSession session=request.getSession();
+		session.removeAttribute("user");
+		return "redirect:/logins";
 	}
+
 	
 	
 	

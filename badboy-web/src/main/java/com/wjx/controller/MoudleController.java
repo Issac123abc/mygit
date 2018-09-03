@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wjx.entity.Moudle;
+import com.wjx.entity.Register;
 import com.wjx.service.MoudleService;
 
 @Controller
@@ -32,6 +34,9 @@ public class MoudleController {
 	
 	@Autowired
 	private MoudleService moudleService;
+	
+	@Autowired
+	HttpServletRequest request;
 	
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
@@ -85,7 +90,16 @@ public class MoudleController {
 		}
 	}
 	
-	
-	
+	@RequestMapping("/logins")
+	public String logins(){
+		HttpSession session=request.getSession();
+		Register reg=(Register) session.getAttribute("user");
+		if(reg!=null){
+			return "redirect:/user/main";
+		}else{
+			return "login";
+		}
+		
+	}
 	
 }
