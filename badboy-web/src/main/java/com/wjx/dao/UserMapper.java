@@ -4,7 +4,7 @@ import com.wjx.entity.Register;
 import com.wjx.entity.User;
 
 public interface UserMapper {
-	User findById(Integer id);
+	User findById(String id);
 	
 	void addReg(Register register);
 	

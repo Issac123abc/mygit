@@ -23,7 +23,7 @@ public class TestController {
 	
 	@RequestMapping("/getUser")
 	public String getUser(){
-		User user=userService.getUserById(1);
+		User user=userService.getUserById("1");
 		System.out.println("user:"+user);
 		return "success";
 	}
