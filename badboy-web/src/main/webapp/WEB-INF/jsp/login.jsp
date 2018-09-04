@@ -63,6 +63,10 @@
 				</tr>
 			</table>
 		</form>
+		<div style="width:280px; margin:0px auto; position:relative;">
+			<div style="position:absolute; left:0px;"><a href="${ctx }/register.jsp">立即注册</a></div>
+			<div style="position:absolute; right:16px;"><a href="">忘记密码</a></div>
+		</div>
 		<input type="hidden" value="${param.msg}" id="msg"/>
 	</div>
 </body>

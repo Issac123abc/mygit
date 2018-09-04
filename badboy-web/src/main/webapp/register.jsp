@@ -113,10 +113,13 @@
 					<td><input id="password2" type="password" name="password2" /></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input style="width:100%; height:30px;" type="submit" value="注 册" /></td>
+					<td colspan="2"><input style="width:99%; height:30px;" type="submit" value="注 册" /></td>
 				</tr>
 			</table>
 		</form>
+		<div style="width:280px; margin:0px auto; position:relative;">
+			<div style="position:absolute; right:5px; font-size:19px;"><a href="${ctx }/logins">去登录</a></div>
+		</div>
 		<input type="hidden" value="${param.msg}" id="msg"/>
 	</div>
 	
