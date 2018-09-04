@@ -10,7 +10,9 @@ public interface UserMapper {
 	
 	void addUserId(String id);
 	
-	Register checkReg(String name);
+	Register existPhone(String phone);
+	
+	Register existEmail(String email);
 	
 	Register checkLogin(String name, String password);
 }

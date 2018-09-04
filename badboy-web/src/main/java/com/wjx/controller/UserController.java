@@ -71,21 +71,33 @@ public class UserController {
 	@RequestMapping("/register")
 	public synchronized String register(@RequestParam("phone") String phone, @RequestParam("email") String email, 
 			 @RequestParam("password") String password, Map<String,String> map) throws ParseException, InterruptedException{
-		String uuid=UUID.randomUUID().toString();
-		String uuid2=UUID.randomUUID().toString();
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dateStr=sdf.format(new Date());
-		Date date=sdf.parse(dateStr);				
-		register.setId(uuid);
-		register.setUser_id(uuid2);
-		register.setPhone(phone);
-		register.setEmail(email);
-		//register.setLogin_name(login_name);
-		register.setPassword(password);
-		register.setRegister_time(date);
-		userService.addRegs(register);
-		map.put("success", "register_success");
-		return "redirect:/user/success";
+		
+		Register regphone=userService.existPhones(phone);
+		Register regemail=userService.existEmails(email);
+		if(regphone!=null){
+			map.put("msg", "existphone");
+			return "redirect:/register.jsp";
+		}else if(regemail!=null){
+			map.put("msg", "existemail");
+			return "redirect:/register.jsp";
+		}else{
+			String uuid=UUID.randomUUID().toString();
+			String uuid2=UUID.randomUUID().toString();
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String dateStr=sdf.format(new Date());
+			Date date=sdf.parse(dateStr);				
+			register.setId(uuid);
+			register.setUser_id(uuid2);
+			register.setPhone(phone);
+			register.setEmail(email);
+			//register.setLogin_name(login_name);
+			register.setPassword(password);
+			register.setRegister_time(date);
+			userService.addRegs(register);
+			map.put("success", "register_success");
+			return "redirect:/user/success";
+		}
+		
 	}
 	
 	@RequestMapping("/login")
@@ -93,11 +105,12 @@ public class UserController {
 		Register exist=userService.checkLogins(name, password);
 		if(exist!=null){
 			HttpSession session=request.getSession();
-			session.setAttribute("user", exist);			
+			session.setAttribute("user", exist);	
+			session.setMaxInactiveInterval(20*60);
 			return "redirect:/user/main";
 		}else{
 			map.put("msg", "error");
-			return "login";
+			return "redirect:/logins";
 		}	
 	}
 	

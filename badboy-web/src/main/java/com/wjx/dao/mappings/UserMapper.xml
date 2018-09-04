@@ -16,8 +16,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	insert into user(id) values(#{id})
     </insert>
     
-    <select id="checkReg" parameterType="String" resultType="com.wjx.entity.Register">
-    	select * from register where phone=#{name} or email=#{name} or login_name=#{name}
+    <select id="existPhone" parameterType="String" resultType="com.wjx.entity.Register">
+    	select * from register where phone=#{phone}
+    </select>
+    
+    <select id="existEmail" parameterType="String" resultType="com.wjx.entity.Register">
+    	select * from register where email=#{email}
     </select>
     
     <select id="checkLogin" resultType="com.wjx.entity.Register">

@@ -11,7 +11,7 @@ import com.wjx.entity.Register;
 
 public class LoginInterceptor implements HandlerInterceptor{
 
-	private static final String[] IGNORE_URI = {"register","login"};
+	private static final String[] IGNORE_URI = {"register","login","success"};
 	
 	public void afterCompletion(HttpServletRequest arg0,
 			HttpServletResponse arg1, Object arg2, Exception arg3)

@@ -21,15 +21,20 @@ public class UserServiceImpl implements UserService {
 	public void addRegs(Register register) {
 		userMapper.addReg(register);
 		userMapper.addUserId(register.getUser_id());
-		System.out.println("×¢²á³É¹¦...");
 	}
 
-	public Register checkRegs(String name) {
-		return userMapper.checkReg(name);
+	public Register existPhones(String phone) {
+		return userMapper.existPhone(phone);
+	}
+	
+	public Register existEmails(String email) {
+		return userMapper.existEmail(email);
 	}
 
 	public Register checkLogins(String name, String password) {
 		return userMapper.checkLogin(name, password);
 	}
+
+	
 
 }

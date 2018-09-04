@@ -63,7 +63,7 @@
 				</tr>
 			</table>
 		</form>
-		<input type="hidden" value="${msg}" id="msg"/>
+		<input type="hidden" value="${param.msg}" id="msg"/>
 	</div>
 </body>
 </html>

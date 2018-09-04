@@ -8,7 +8,9 @@ public interface UserService {
 	
 	void addRegs(Register register);
 	
-	Register checkRegs(String name);
+	Register existPhones(String phone);
+	
+	Register existEmails(String email);
 	
 	Register checkLogins(String name, String password);
 	

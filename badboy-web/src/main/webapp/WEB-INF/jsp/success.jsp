@@ -9,7 +9,7 @@
 <body>
 	<div style="width:400px; margin:120px auto; text-align:center;">
 		<h1>&nbsp;&nbsp;&nbsp;注册成功！</h1>
-		<h2><a href="../login.jsp">>>去登录</a></h2>
+		<h2><a href="/badboy-web/logins">>>去登录</a></h2>
 	</div>
 	
 </body>

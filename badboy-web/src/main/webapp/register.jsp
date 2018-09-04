@@ -14,6 +14,15 @@
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="${ctx }/js/layer/layer.js"></script>
 <script type="text/javascript">
+	$(function(){
+		var msg=$('#msg').val();
+		if(msg=='existphone'){
+			layer.alert("该手机号已注册！", {offset: '150px'});
+		}else if(msg=='existemail'){
+			layer.alert("该邮箱已注册！", {offset: '150px'});
+		}
+	});
+	
 	var submit=false;
 	
 	function check(){
@@ -27,8 +36,16 @@
 			layer.alert("手机号码不能为空！", {offset: '150px'});
 			return false;
 		}
+		if(!isPoneAvailable(phone)){
+			layer.alert("不是有效的手机号格式！", {offset: '150px'});
+			return false;
+		}
 		if(email==''||email==null){
 			layer.alert("电子邮箱不能为空！", {offset: '150px'});
+			return false;
+		}
+		if(!isEmail(email)){
+			layer.alert("不是有效的邮箱格式！", {offset: '150px'});
 			return false;
 		}
 		/* if(login_name==''||login_name==null){
@@ -48,6 +65,24 @@
 			return submit;
 		}
 		return false;
+	}
+	
+	function isPoneAvailable(str) {
+        var phonereg=/^[1][3,4,5,7,8][0-9]{9}$/;
+        if (!phonereg.test(str)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+	
+	function isEmail(str){
+		var emailreg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+		if(!emailreg.test(str)){
+			return false;
+		}else{
+			return true;
+		}
 	}
 		
 	
@@ -82,6 +117,7 @@
 				</tr>
 			</table>
 		</form>
+		<input type="hidden" value="${param.msg}" id="msg"/>
 	</div>
 	
 </body>
