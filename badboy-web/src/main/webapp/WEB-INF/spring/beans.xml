@@ -18,10 +18,27 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
 	
+	<bean id="iniRealm" class="org.apache.shiro.realm.text.IniRealm">
+		<constructor-arg name="resourcePath" value="classpath:shiro-web.ini"></constructor-arg>
+	</bean>
 	
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="iniRealm"></property>
+	</bean>
 	
-	
-	
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager"></property>
+		<property name="loginUrl" value="/logins"></property>
+		<property name="successUrl" value="/user/main"></property>
+		<property name="unauthorizedUrl" value="/error"></property>
+		<property name="filterChainDefinitions">
+			<value>
+				/logins=anon
+				/register.jsp=anon
+				/user/main=authc				
+			</value>
+		</property>
+	</bean>
 	
 	
 	
