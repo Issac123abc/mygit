@@ -7,6 +7,6 @@
 <title>错误页面</title>
 </head>
 <body>
-	<h2>权限不足</h2>
+	<h2>权限不足，请联系管理员</h2>
 </body>
 </html>

@@ -6,6 +6,8 @@ import com.wjx.entity.User;
 public interface UserService {
 	User getUserById(String id);
 	
+	Register findLoginNames(String name);
+	
 	void addRegs(Register register);
 	
 	Register existPhones(String phone);

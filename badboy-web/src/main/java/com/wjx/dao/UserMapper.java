@@ -6,6 +6,8 @@ import com.wjx.entity.User;
 public interface UserMapper {
 	User findById(String id);
 	
+	Register findLoginName(String name);
+	
 	void addReg(Register register);
 	
 	void addUserId(String id);

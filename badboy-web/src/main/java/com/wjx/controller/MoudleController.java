@@ -38,12 +38,7 @@ public class MoudleController {
 	@Autowired
 	HttpServletRequest request;
 	
-	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	
-	@RequestMapping("/moudleSuccess")
-	public String moudleSuccess(){
-		return "addMoudle_success";
-	}
+	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	
 	
 	@RequestMapping(value="/moudle", method=RequestMethod.POST)
 	public String addMoudle(@RequestParam("title") String title, @RequestParam("images") MultipartFile file,
@@ -88,18 +83,6 @@ public class MoudleController {
 		}else{
 			return null;
 		}
-	}
-	
-	@RequestMapping("/logins")
-	public String logins(){
-		HttpSession session=request.getSession();
-		Register reg=(Register) session.getAttribute("user");
-		if(reg!=null){
-			return "redirect:/user/main";
-		}else{
-			return "login";
-		}
-		
-	}
+	}		
 	
 }

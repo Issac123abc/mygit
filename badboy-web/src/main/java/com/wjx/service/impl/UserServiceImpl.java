@@ -35,6 +35,10 @@ public class UserServiceImpl implements UserService {
 		return userMapper.checkLogin(name, password);
 	}
 
+	public Register findLoginNames(String name) {
+		return userMapper.findLoginName(name);
+	}
+
 	
 
 }

@@ -26,7 +26,7 @@ import test.MyRealm;
 @Controller
 public class TestController {
 	
-	//ini配置
+	//ini配置 iniRealm
 	public void login(){
 		Factory<SecurityManager> factory=new IniSecurityManagerFactory("classpath:shiro.ini");
 		SecurityManager securityManager=factory.getInstance();
@@ -68,11 +68,26 @@ public class TestController {
 		}
 	}
 	
+	public void dbLogin(){
+		Factory<SecurityManager> factory=new IniSecurityManagerFactory("classpath:shiro-mysql.ini");
+		SecurityManager securityManager=factory.getInstance();
+		SecurityUtils.setSecurityManager(securityManager);
+		Subject subject=SecurityUtils.getSubject();
+		UsernamePasswordToken token=new UsernamePasswordToken("admin","123456");
+		try {
+			subject.login(token);
+			System.out.println("登录成功");
+			
+		} catch (AuthenticationException e) {
+			System.out.println("用户名或密码错误");
+		}
+	}
+	
 	public static void main(String[] args) {
 		TestController test=new TestController();
 		//test.login();
-		test.myLogin();
-		
+		//test.myLogin();
+		test.dbLogin();
 		
 	}
 	

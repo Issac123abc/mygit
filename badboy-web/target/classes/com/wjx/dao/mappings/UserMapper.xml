@@ -8,6 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select username,age,gender,photo,region,autograph from user where id=#{id}
     </select>
         
+    <select id="findLoginName" parameterType="String" resultType="com.wjx.entity.Register">
+        select login_name,user_id from register where phone=#{name} or email=#{name} or login_name=#{name}
+    </select>
+    
     <insert id="addReg" parameterType="com.wjx.entity.Register">
     	insert into register values(#{id},#{user_id},#{phone},#{email},#{login_name},#{password},#{register_time})
     </insert>

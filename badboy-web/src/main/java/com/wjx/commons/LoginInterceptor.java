@@ -28,6 +28,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
 			Object arg2) throws Exception {
+		System.out.println("preHandle...");
 		boolean flag=false;
 		String url=request.getRequestURL().toString();
 		for(String s:IGNORE_URI){

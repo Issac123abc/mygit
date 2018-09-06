@@ -3,15 +3,9 @@ package com.wjx.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-
-
-
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,10 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-
-
-
-
 import com.wjx.entity.Moudle;
 import com.wjx.entity.Register;
 import com.wjx.entity.User;
@@ -40,7 +30,6 @@ import com.wjx.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 	
-	private final String SUCCESS="success";
 	private final String MAIN="main";
 	
 	@Autowired
@@ -53,26 +42,15 @@ public class UserController {
 	private MoudleService moudleService;
 	
 	@Autowired
-	HttpServletRequest request;
+	HttpServletRequest request;	
 	
-	@RequestMapping("/test")
-	public String test(){
-		String uuid=UUID.randomUUID().toString();
-		System.out.println("uuid:"+uuid);
-		return SUCCESS;
-	}
 	
-	@RequestMapping("/success")
-	public String success(){	
-		return SUCCESS;
-	}
 	
 	@RequestMapping("/main")
 	public String main(Map<String,Object> map){
 		List<Moudle> moudleList=moudleService.getMoudleLists();
 		HttpSession session=request.getSession();
-		Register reg=(Register) session.getAttribute("user");
-		String user_id=reg.getUser_id();
+		String user_id=session.getAttribute("user_id").toString();
 		User user=userService.getUserById(user_id);
 		map.put("moudles", moudleList);
 		map.put("user", user);
@@ -106,31 +84,28 @@ public class UserController {
 			register.setPassword(password);
 			register.setRegister_time(date);
 			userService.addRegs(register);
-			map.put("success", "register_success");
-			return "redirect:/user/success";
+			return "redirect:/success";
 		}
 		
 	}
 	
 	@RequestMapping("/login")
 	public String login(@RequestParam(value="name",required=false) String name, @RequestParam(value="password",required=false) String password, Map<String,String> map){		
-		/*Register exist=userService.checkLogins(name, password);
-		if(exist!=null){
-			HttpSession session=request.getSession();
-			session.setAttribute("user", exist);	
-			session.setMaxInactiveInterval(20*60);
-			return "redirect:/user/main";
-		}else{
-			map.put("msg", "error");
-			return "redirect:/logins";
-		}	*/
-		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken();
-		try {
+		Register reg=userService.findLoginNames(name);
+		String username=null, user_id=null;
+		if(reg!=null){
+			username=reg.getLogin_name();
+			user_id=reg.getUser_id();
+		}		
+		try {			
+			Subject subject=SecurityUtils.getSubject();
+			UsernamePasswordToken token=new UsernamePasswordToken(username,password);
 			subject.login(token);
+			HttpSession session=request.getSession();
+			session.setAttribute("user_id", user_id);	
 			return "redirect:/user/main";
+			
 		} catch (AuthenticationException e) {
-			// TODO Auto-generated catch block
 			map.put("msg", "error");
 			return "redirect:/logins";
 		}
@@ -139,8 +114,8 @@ public class UserController {
 	
 	@RequestMapping("/logout")
 	public String logout(){
-		HttpSession session=request.getSession();
-		session.removeAttribute("user");
+		Subject subject=SecurityUtils.getSubject();
+		subject.logout();
 		return "redirect:/logins";
 	}
 
