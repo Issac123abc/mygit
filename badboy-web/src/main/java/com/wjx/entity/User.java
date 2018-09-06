@@ -2,7 +2,6 @@ package com.wjx.entity;
 
 import org.springframework.stereotype.Component;
 
-@Component
 public class User {
 	private String id;
 	private String username;
@@ -60,6 +59,10 @@ public class User {
 	}
 	public void setLogin_name(String login_name) {
 		this.login_name = login_name;
+	}
+	
+	public User() {
+
 	}
 	
 	@Override

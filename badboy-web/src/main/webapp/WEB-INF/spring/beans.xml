@@ -43,9 +43,7 @@
 				/** = authc				
 			</value>
 		</property>
-	</bean>
-	
-	
+	</bean>	
 	
 	
 </beans>

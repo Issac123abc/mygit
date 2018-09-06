@@ -1,5 +1,7 @@
 package com.wjx.controller;
 
+import javax.annotation.Resource;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -82,13 +84,6 @@ public class TestController {
 			System.out.println("用户名或密码错误");
 		}
 	}
-	
-	public static void main(String[] args) {
-		TestController test=new TestController();
-		//test.login();
-		//test.myLogin();
-		test.dbLogin();
 		
-	}
 	
 }

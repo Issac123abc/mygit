@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
-@Component
 public class Register {
 	private String id;
 	private String user_id;
