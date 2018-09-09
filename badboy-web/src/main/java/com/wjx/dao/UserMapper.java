@@ -17,4 +17,6 @@ public interface UserMapper {
 	Register existEmail(String email);
 	
 	Register checkLogin(String name, String password);
+	
+	void UpdateUser(User user);
 }

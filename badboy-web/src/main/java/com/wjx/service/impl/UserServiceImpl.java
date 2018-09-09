@@ -39,6 +39,10 @@ public class UserServiceImpl implements UserService {
 		return userMapper.findLoginName(name);
 	}
 
+	public void UpdateUsers(User user) {
+		userMapper.UpdateUser(user);	
+	}
+
 	
 
 }

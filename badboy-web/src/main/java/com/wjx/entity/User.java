@@ -6,6 +6,7 @@ public class User {
 	private String id;
 	private String username;
 	private Integer age;
+	//0:Female,1:male
 	private Integer gender;
 	private String photo;
 	private String region;

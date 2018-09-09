@@ -39,6 +39,7 @@
 				/user/login =anon
 				/register.jsp = anon
 				/success = anon
+				/images/** = anon
 				/user/logout = logout	
 				/** = authc				
 			</value>

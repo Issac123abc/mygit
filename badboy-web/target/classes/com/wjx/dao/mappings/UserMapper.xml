@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.wjx.dao.UserMapper">
     <select id="findById" parameterType="String" resultType="com.wjx.entity.User">
-        select username,age,gender,photo,region,autograph from user where id=#{id}
+        select * from user where id=#{id}
     </select>
         
     <select id="findLoginName" parameterType="String" resultType="com.wjx.entity.Register">
@@ -31,4 +31,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="checkLogin" resultType="com.wjx.entity.Register">
     	select * from register where (phone=#{0} or email=#{0} or login_name=#{0}) and password=#{1}
     </select>
+    
+    <update id="UpdateUser" parameterType="com.wjx.entity.User">
+    	update user set username=#{username},age=#{age},gender=#{gender},
+    	<if test="photo!=null and photo!=''">  
+        	 photo=#{photo},
+        </if>
+    	region=#{region},autograph=#{autograph},login_name=#{login_name} 
+    	where id=#{id}    	
+    </update>
 </mapper>

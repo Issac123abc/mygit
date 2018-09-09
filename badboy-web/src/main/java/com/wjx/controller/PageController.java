@@ -1,11 +1,11 @@
 package com.wjx.controller;
 
-import javax.servlet.http.HttpSession;
-
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.wjx.entity.Register;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class PageController {
@@ -28,14 +28,16 @@ public class PageController {
 		
 	@RequestMapping("/logins")
 	public String logins(){
-		/*HttpSession session=request.getSession();
-		Register reg=(Register) session.getAttribute("user");
-		if(reg!=null){
+		Session session=SecurityUtils.getSubject().getSession();
+		Object user_id=session.getAttribute("user_id");
+		if(user_id!=null){
 			return "redirect:/user/main";
 		}else{
 			return "login";
-		}*/
-		return "login";
+		}
+		
 	}
+	
+	
 	
 }

@@ -1,5 +1,10 @@
 package com.wjx.controller;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.sql.Blob;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,12 +18,27 @@ import javax.servlet.http.HttpSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
+
+
+
+
+
+
+
+
+
+
+import sun.misc.BASE64Decoder;
 
 import com.wjx.entity.Moudle;
 import com.wjx.entity.Register;
@@ -47,9 +67,9 @@ public class UserController {
 	
 	
 	@RequestMapping("/main")
-	public String main(Map<String,Object> map){
+	public String main(Map<String,Object> map) throws IOException{
 		List<Moudle> moudleList=moudleService.getMoudleLists();
-		HttpSession session=request.getSession();
+		Session session=SecurityUtils.getSubject().getSession();
 		String user_id=session.getAttribute("user_id").toString();
 		User user=userService.getUserById(user_id);
 		map.put("moudles", moudleList);
@@ -101,7 +121,7 @@ public class UserController {
 			Subject subject=SecurityUtils.getSubject();
 			UsernamePasswordToken token=new UsernamePasswordToken(username,password);
 			subject.login(token);
-			HttpSession session=request.getSession();
+			Session session=SecurityUtils.getSubject().getSession();		
 			session.setAttribute("user_id", user_id);	
 			return "redirect:/user/main";
 			
@@ -120,8 +140,47 @@ public class UserController {
 	}
 
 	
+	@RequestMapping("/upuser")
+	public String upuser(User user){
+		if(user.getPhoto().toString()!=null && user.getPhoto().toString()!=""){
+			//暂时只支持jpg格式
+			String header ="data:image/jpeg;base64,";
+			//去掉头部
+			String image = user.getPhoto().substring(header.length());
+			String path=request.getServletContext().getRealPath("/");
+			
+			BASE64Decoder decoder = new BASE64Decoder();
+			try {
+				//base64解码
+				byte[] decodedBytes = decoder.decodeBuffer(image);
+				//photo name
+				String imgName=user.getLogin_name()+"_headphoto.jpg";
+				//本地保存地址
+				String imgSaveUrl =path+"images/headphoto/"+imgName;
+				//db保存地址
+				String dbImgUrl="images/headphoto/"+imgName;
+				user.setPhoto(dbImgUrl);
+				FileOutputStream out = new FileOutputStream(imgSaveUrl);
+				out.write(decodedBytes);
+				out.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		userService.UpdateUsers(user);
+		return "redirect:/user/main";
+	}
 	
-	
+	@RequestMapping(value="/edituser/{id}", method=RequestMethod.GET)
+	public String edituser(@PathVariable("id") String id,Map<String,Object> map){
+		User user=userService.getUserById(id);
+		map.put("user", user);		
+		return "edituser";
+	}
 	
 	
 }

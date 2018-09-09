@@ -16,4 +16,5 @@ public interface UserService {
 	
 	Register checkLogins(String name, String password);
 	
+	void UpdateUsers(User user);
 }
