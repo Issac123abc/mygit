@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 
+
 import sun.misc.BASE64Decoder;
 
 import com.wjx.entity.Moudle;
@@ -175,9 +176,11 @@ public class UserController {
 		return "redirect:/user/main";
 	}
 	
-	@RequestMapping(value="/edituser/{id}", method=RequestMethod.GET)
-	public String edituser(@PathVariable("id") String id,Map<String,Object> map){
-		User user=userService.getUserById(id);
+	@RequestMapping(value="/edituser", method=RequestMethod.GET)
+	public String edituser(Map<String,Object> map){
+		Session session=SecurityUtils.getSubject().getSession();
+		String user_id=session.getAttribute("user_id").toString();
+		User user=userService.getUserById(user_id);
 		map.put("user", user);		
 		return "edituser";
 	}

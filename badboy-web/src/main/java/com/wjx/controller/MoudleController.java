@@ -1,30 +1,31 @@
 package com.wjx.controller;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wjx.entity.Moudle;
-import com.wjx.entity.Register;
+import com.wjx.entity.User;
 import com.wjx.service.MoudleService;
+import com.wjx.service.UserService;
 
 @Controller
 public class MoudleController {
@@ -34,6 +35,9 @@ public class MoudleController {
 	
 	@Autowired
 	private MoudleService moudleService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	HttpServletRequest request;
@@ -67,8 +71,13 @@ public class MoudleController {
 		return "redirect:/user/main";
 	}
 	
-	@RequestMapping(value="/moudle", method=RequestMethod.GET)
-	public String gotoMoudle(@RequestParam("title") String title){
+	@RequestMapping(value="/moudle/{title}", method=RequestMethod.GET)
+	public String gotoMoudle(@PathVariable("title") String title,Map<String,Object> map){
+		Session session=SecurityUtils.getSubject().getSession();
+		String user_id=session.getAttribute("user_id").toString();
+		User user=userService.getUserById(user_id);
+		map.put("user", user);
+		
 		if(title.equals("˳�糵")){
 			return "hitched";
 		}
