@@ -18,7 +18,6 @@
 		var width=$('#name').outerWidth();
 		$('#setting').css('left',740+width+20+'px');
 		$('#setting').hover(function() {
-			/* $('#settingDiv').css('display','block'); */
 			$('#setting').append('<table style="width:120px; background-color:white;" class="setting">'+
 			'<tr><td><a href="${ctx }/user/edituser/${requestScope.user.id}">修改资料</a></td></tr><tr><td><a href="${ctx }/user/logout">退出登录</a></td></tr></table>');
 		},function(){
@@ -58,7 +57,7 @@
 			<tr>
 				<c:forEach items="${requestScope.moudles }" var="m">					
 					<td onclick="window.location.href='${ctx}/moudle?title=${m.title }'">
-						<img alt="${m.title }" src="${ctx}/${m.images }" style="width:120px; height:120px;">
+						<img alt="${m.title }" src="${ctx}/${m.images }" style="width:120px; height:120px; cursor: pointer;">
 						<div style="font-size: 25px; margin-top:5px;">${m.title }</div>
 					</td>
 				</c:forEach>
@@ -66,5 +65,6 @@
 			
 		</table>
 	</div>
+	<div id="footer" style="width:100%; height:250px;"></div>
 </body>
 </html>

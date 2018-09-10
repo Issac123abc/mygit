@@ -12,7 +12,6 @@
 	input{height:20px;}
 </style>
 <script type="text/javascript" src="${ctx }/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="${ctx }/js/layer/layer.js"></script>
 <script type="text/javascript">
 	function check(){
 		var title=$('#title').val();
@@ -20,15 +19,18 @@
 		var content=$('#content').val();
 
 		if(title==''||title==null){
-			layer.alert("标题不能为空！", {offset: '150px'});
+			$('#hide').css('display','block');
+			$('#info').html('标题不能为空');
 			return false;
 		}
 		if(images==''||images==null){
-			layer.alert("图片不能为空！", {offset: '150px'});
+			$('#hide').css('display','block');
+			$('#info').html('图片不能为空');
 			return false;
 		}
 		if(content==''||content==null){
-			layer.alert("介绍内容不能为空！", {offset: '150px'});
+			$('#hide').css('display','block');
+			$('#info').html('介绍内容不能为空');
 			return false;
 		}
 		return true;
@@ -37,6 +39,10 @@
 </head>
 <body>
 	<div style="width:80%; margin:120px auto;">
+		<div id="hide" style="width:260px; height:30px; margin:0px auto; position:relative; display:none;">
+			<img alt="" src="${ctx }/images/settings/tips.png" style="width:20px; height:20px;">
+			<div id="info" style="position:absolute; top:-1px; left:32px; color:red;"></div>
+		</div>
 		<form action="moudle" method="POST" enctype="multipart/form-data" onsubmit="return check();">
 			<table style="width:320px; margin:0px auto;">
 				<tr>

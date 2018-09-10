@@ -64,7 +64,7 @@ public class MoudleController {
 		moudle.setContent(content);
 		moudle.setCreat_time(date);
 		moudleService.addMoudles(moudle);
-		return "redirect:/moudleSuccess";
+		return "redirect:/user/main";
 	}
 	
 	@RequestMapping(value="/moudle", method=RequestMethod.GET)
@@ -80,6 +80,8 @@ public class MoudleController {
 		}
 		else if(title.equals("同城打听")){
 			return "city";
+		}else if(title.equals("会展活动")){
+			return "show";
 		}else{
 			return null;
 		}

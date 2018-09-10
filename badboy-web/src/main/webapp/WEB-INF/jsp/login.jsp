@@ -16,10 +16,8 @@
 	var submit=false;
 	
 	function check(){
-				
 		var name=$('#name').val();
 		var password=$('#password').val();
-
 		if(name==''||name==null){
 			$('#param').css('display','none');
 			$('#hide').css('display','block');

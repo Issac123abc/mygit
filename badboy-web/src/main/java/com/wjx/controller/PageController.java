@@ -38,6 +38,9 @@ public class PageController {
 		
 	}
 	
-	
+	@RequestMapping("/moudlepage")
+	public String moudle(){
+		return "moudle";
+	}
 	
 }
