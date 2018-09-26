@@ -12,8 +12,11 @@
 </style>
 <script type="text/javascript">
 	$(function(){
+		var bodyWidth=$(document.body).width();
 		var width=$('#name').outerWidth();
-		$('#setting').css('left',740+width+20+'px');
+		$('#photo').css('left',bodyWidth*0.6+'px');
+		$('#username').css('left',(bodyWidth*0.6+40)+'px');
+		$('#setting').css('left',(bodyWidth*0.6+40+width+20)+'px');
 		$('#setting').hover(function() {
 			$('#setting').append('<table style="width:120px; background-color:white;" class="setting">'+
 			'<tr><td><a href="${ctx }/user/edituser">修改资料</a></td></tr><tr><td><a href="${ctx }/user/logout">退出登录</a></td></tr></table>');

@@ -5,10 +5,10 @@
 		<div id="homeimg" style="position:absolute; left:85px; line-height:35px; font-size:18px;">
 			<a href="${ctx }/user/main"><i class="layui-icon layui-icon-home" style="font-size: 20px; font-family:SimHei;"></i>&nbsp;主页</a>
 		</div>
-		<div style="position:absolute; left:700px; height:30px; margin-top:4px;">			
+		<div id="photo" style="position:absolute; height:30px; margin-top:4px;">			
 			<img alt="" src="${ctx }/${requestScope.user.photo }" style="width:27px; height:27px;">
 		</div>
-		<div style="position:absolute; left:740px; height:30px; line-height:35px;">
+		<div id="username" style="position:absolute; height:30px; line-height:35px;">
 			<span id="name">${requestScope.user.username }</span>&nbsp;&nbsp;&nbsp;&nbsp;			
 		</div>		
 

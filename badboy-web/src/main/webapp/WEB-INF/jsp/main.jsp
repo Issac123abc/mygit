@@ -9,7 +9,7 @@
 <title>圈子</title>
 <%@ include file="topjs.jsp" %>
 </head>
-<body style="width:60%;  margin:0px auto;">
+<body style="width:70%;  margin:0px auto;">
 	<%@ include file="top.jsp" %>
 	<div id="head" style="width:100%; height:450px;">
 		<img alt="" style="width:100%; height:100%;" src="${ctx}/images/001.jpg">
