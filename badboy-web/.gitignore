@@ -1,11 +1,16 @@
+/target/
 
+.classpath
+.project
+.settings/
+
+### 
 *.class
 
 *.log
 
 *.ctxt
 
-.mtj.tmp/
 
 *.jar
 *.war
@@ -14,5 +19,5 @@
 *.zip
 *.tar.gz
 *.rar
+ ###
 
-/target
