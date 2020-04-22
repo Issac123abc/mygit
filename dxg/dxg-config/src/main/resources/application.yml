@@ -1,0 +1,36 @@
+server:
+  port: 8102
+  servlet:
+    context-path: /dxg-config
+spring:
+  application:
+    name: dxg-config
+    
+  profiles:
+    active: native
+    
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/properties
+                     
+      
+  security:
+    basic:
+      enabled: true
+    user:
+      name: root
+      password: 123456
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@localhost:8100/eureka
+    register-with-eureka: true
+    fetch-registry: true
+    
+  instance: #eureka客户端实例配置
+    lease-renewal-interval-in-seconds: 5 #定义服务多久去注册中心续约
+    lease-expiration-duration-in-seconds: 5 #定义服务多久不去续约认为服务失效   
+ 

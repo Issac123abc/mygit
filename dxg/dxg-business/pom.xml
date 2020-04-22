@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.xinjing</groupId>
-	<artifactId>dxg-admin</artifactId>
+	<artifactId>dxg-business</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>dxg-admin</name>
+	<name>dxg-business</name>
 	<description>restaurant project for Spring Boot</description>
 
 	<properties>

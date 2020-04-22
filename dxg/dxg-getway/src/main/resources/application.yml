@@ -1,0 +1,33 @@
+server:
+  port: 8101
+  servlet:
+    context-path: /dxg-getway
+spring:
+  application:
+    name: dxg-getway
+  cloud:
+    gateway:   
+      routes:              
+        - id: dxg-admin
+          uri: lb://dxg-admin
+          predicates:
+            - Path= /dxg-admin/**   #/community/**路径的转到community服务
+          filters:
+            #- StripPrefix=1
+            #- PrefixPath=/v1
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallback-uri: forward:/fallback  #断路器回调方法
+                
+                
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@localhost:8100/eureka
+    register-with-eureka: true
+    fetch-registry: true
+    
+  instance: #eureka客户端实例配置
+    lease-renewal-interval-in-seconds: 5 #定义服务多久去注册中心续约
+    lease-expiration-duration-in-seconds: 5 #定义服务多久不去续约认为服务失效
