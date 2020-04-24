@@ -1,4 +1,4 @@
-package com.xinjing.dxg.common;
+package com.xinjing.dxg.common.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

@@ -25,7 +25,7 @@ public class User {
 	private String phone;
 	
 	@Column(name = "type")
-	private String type;
+	private Integer type;
 	
 	@Column(name = "email")
 	private String email;
@@ -34,7 +34,7 @@ public class User {
 	private String image;
 	
 	@Column(name = "is_delete")
-	private String isDelete;
+	private Integer isDelete;
 	
 	@Column(name = "create_time")
 	private Date createTime;
@@ -50,9 +50,6 @@ public class User {
 	
 	@Column(name = "lat")
 	private Double lat;
-	
-	@Column(name = "addr")
-	private String addr;
 
 	public String getId() {
 		return id;
@@ -86,14 +83,6 @@ public class User {
 		this.phone = phone;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -108,14 +97,6 @@ public class User {
 
 	public void setImage(String image) {
 		this.image = image;
-	}
-
-	public String getIsDelete() {
-		return isDelete;
-	}
-
-	public void setIsDelete(String isDelete) {
-		this.isDelete = isDelete;
 	}
 
 	public Date getCreateTime() {
@@ -158,11 +139,20 @@ public class User {
 		this.lat = lat;
 	}
 
-	public String getAddr() {
-		return addr;
+	public Integer getType() {
+		return type;
 	}
 
-	public void setAddr(String addr) {
-		this.addr = addr;
+	public void setType(Integer type) {
+		this.type = type;
 	}
+
+	public Integer getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
+	
 }

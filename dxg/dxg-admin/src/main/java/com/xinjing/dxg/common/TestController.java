@@ -13,7 +13,6 @@ public class TestController {
 	public ApiResponse test(){
 		String uuid = UUID.randomUUID().toString();
 		String replace = uuid.replace("-", "");
-		RedisUtil.set("test", "t1");
 		return ApiResponse.buildRightRep(replace, "成功");
 	}
 }

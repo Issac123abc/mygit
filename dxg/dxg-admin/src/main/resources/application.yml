@@ -12,7 +12,7 @@ spring:
      type: com.alibaba.druid.pool.DruidDataSource
      driver-class-name: com.mysql.cj.jdbc.Driver
    redis:
-     database: 0
+     database: 1
      host: 106.52.60.213
      port: 6379
      timeout: 1000
