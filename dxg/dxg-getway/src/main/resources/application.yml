@@ -1,5 +1,5 @@
 server:
-  port: 8101
+  port: 8300
   servlet:
     context-path: /dxg-getway
 spring:

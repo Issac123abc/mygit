@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DateUtils {
+public class DateUtil {
 	
 	public static String getDateStr(Date date, String pattern){
 		try{

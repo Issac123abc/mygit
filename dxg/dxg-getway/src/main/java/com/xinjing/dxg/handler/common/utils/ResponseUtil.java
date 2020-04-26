@@ -8,7 +8,7 @@ import org.springframework.web.server.ServerWebExchange;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.xinjing.dxg.handler.common.ApiResponse;
+import com.xinjing.dxg.common.ApiResponse;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
