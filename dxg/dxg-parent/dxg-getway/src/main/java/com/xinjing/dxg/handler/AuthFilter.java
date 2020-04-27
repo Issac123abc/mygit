@@ -11,8 +11,9 @@ import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 
+import com.xinjing.dxg.common.ApiResponse;
+import com.xinjing.dxg.common.utils.StringUtil;
 import com.xinjing.dxg.handler.common.AntUrlPathMatcher;
-import com.xinjing.dxg.handler.common.ApiResponse;
 import com.xinjing.dxg.handler.common.utils.RedisUtil;
 import com.xinjing.dxg.handler.common.utils.ResponseUtil;
 import com.xinjing.dxg.handler.constant.FilterConstant;
@@ -44,12 +45,17 @@ public class AuthFilter implements GlobalFilter, Ordered {
 		}
 		String token = exchange.getRequest().getQueryParams().getFirst("token");
 		ApiResponse<String> apiResponse = null;
-		if (token == null || token.trim().equals("")) {
+		if (StringUtil.isBlank(token)) {
 			apiResponse = ApiResponse.buildRep(401, "Unauthorized", "没有权限");
 			return ResponseUtil.response(apiResponse, exchange);
-		}else{
+		} else {
 			String userId = RedisUtil.get(token);
-			
+			if (StringUtil.isBlank(userId)) {
+				apiResponse = ApiResponse.buildRep(401, "Unauthorized", "没有权限");
+				return ResponseUtil.response(apiResponse, exchange);
+			} else {
+				RedisUtil.set(token, userId, 60000 * 30); // 续期30min
+			}
 		}
 		return chain.filter(exchange);
 	}

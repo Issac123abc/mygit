@@ -1,5 +1,7 @@
 package com.xinjing.dxg.manager.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +12,8 @@ import com.xinjing.dxg.common.utils.MathUtil;
 import com.xinjing.dxg.common.utils.RedisUtil;
 import com.xinjing.dxg.common.utils.StringUtil;
 import com.xinjing.dxg.common.utils.ValidateUtil;
+import com.xinjing.dxg.manager.entity.User;
+import com.xinjing.dxg.manager.model.UserModel;
 import com.xinjing.dxg.manager.service.UserService;
 
 @RequestMapping("/manager")
@@ -56,10 +60,28 @@ public class UserController {
 		return ApiResponse.OK;
 	}
 	
+	@RequestMapping(value = "/getDetail", method = RequestMethod.GET)
+	public ApiResponse<User> getDetail(HttpServletRequest request){
+		String token = request.getParameter("token");
+		String userId = RedisUtil.get(token);
+		User user = userService.getDetail(userId);
+		return ApiResponse.buildRightRep(user, "成功");
+	}
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ApiResponse edit(){
-		
-		return null;
+	public ApiResponse edit(UserModel model){
+		if(model == null){
+			return ApiResponse.buildRep(1000, null, "参数错误");
+		}
+		if(StringUtil.isBlank(model.getId())){
+			return ApiResponse.buildRep(1000, null, "id不能为空");
+		}
+		try{
+			userService.edit(model);
+		}catch(Exception e){
+			return ApiResponse.buildRep(1000, null, e.getMessage());
+		}
+		return ApiResponse.OK;
 	}
 	
 	@RequestMapping(value = "/smsCode", method = RequestMethod.GET)
@@ -73,5 +95,16 @@ public class UserController {
 		String smsCode = MathUtil.smsCode();
 		RedisUtil.set(phone, smsCode, 60000*2);
 		return ApiResponse.buildRightRep(smsCode, "成功");
+	}
+	
+	@RequestMapping(value = "/passwd", method = RequestMethod.PUT)
+	public ApiResponse passwd(String phone, String smsCode, String passwd){
+		
+		return ApiResponse.OK;
+	}
+	
+	public ApiResponse updateAccount(String phone, String smsCode, String passwd){
+		
+		return ApiResponse.OK;
 	}
 }

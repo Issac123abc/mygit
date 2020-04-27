@@ -1,5 +1,5 @@
 server:
-  port: 8101
+  port: 8300
   servlet:
     context-path: /dxg-getway
 spring:
@@ -31,6 +31,21 @@ spring:
        maxWait: 3		# 连接池最大阻塞等待时间（使用负值表示没有限制）  
        maxActive: 8 	# 连接池最大连接数（使用负值表示没有限制）  
                 
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000 #断路器超时时间，默认1000ms
+    fallbackcmd:
+      excution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000 # Hystrix 的 fallbackcmd 时间
                 
 eureka:
   client:

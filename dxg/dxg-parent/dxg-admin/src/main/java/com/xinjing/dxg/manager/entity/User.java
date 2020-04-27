@@ -50,6 +50,12 @@ public class User {
 	
 	@Column(name = "lat")
 	private Double lat;
+	
+	@Column(name = "addr")
+	private String addr;
+	
+	@Column(name = "sex")
+	private String sex;
 
 	public String getId() {
 		return id;
@@ -153,6 +159,22 @@ public class User {
 
 	public void setIsDelete(Integer isDelete) {
 		this.isDelete = isDelete;
+	}
+
+	public String getAddr() {
+		return addr;
+	}
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 	
 }

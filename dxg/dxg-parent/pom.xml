@@ -38,11 +38,18 @@
 				<scope>import</scope>
 			</dependency>
 			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>1.9.3</version>
+			</dependency>
+			
+			<dependency>
 				<groupId>com.xinjing</groupId>
 				<artifactId>dxg-common</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 				<scope>compile</scope>
 			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 
