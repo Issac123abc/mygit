@@ -5,6 +5,9 @@ server:
 spring:
    application:
      name: dxg-admin
+   http: 
+     multipart: 
+       max-file-size: 100000
    datasource:
      username: root
      password: 123456
@@ -23,6 +26,15 @@ spring:
        maxWait: 3		# 连接池最大阻塞等待时间（使用负值表示没有限制）  
        maxActive: 8 	# 连接池最大连接数（使用负值表示没有限制）  
        
+fdfs: 
+# 连接Tracker服务器超时时间
+  connect-timeout: 10000
+# storage服务器响应的超时时间
+  so-timeout: 3000
+#  trakcer服务器的数量
+  tracker-list: 
+   - 106.52.60.213:22122
+
 eureka:
   client:
     service-url:
