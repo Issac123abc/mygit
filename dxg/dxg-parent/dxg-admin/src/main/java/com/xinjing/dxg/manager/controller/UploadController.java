@@ -1,41 +1,52 @@
 package com.xinjing.dxg.manager.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.io.OutputStream;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.luhuiguo.fastdfs.domain.StorePath;
-import com.luhuiguo.fastdfs.service.FastFileStorageClient;
 import com.xinjing.dxg.common.ApiResponse;
+import com.xinjing.dxg.common.utils.UUIDUtil;
 
 @RequestMapping("/upload")
 @RestController
 public class UploadController {
 	
-	@Autowired
-	private FastFileStorageClient storageClient;
-
 	@RequestMapping(method = RequestMethod.POST)
-	public ApiResponse<String> upload(MultipartFile file) {
-		if (file == null) {
+	public ApiResponse<String> upload(MultipartFile[] files) throws IOException {
+		if (files == null) {
 			return ApiResponse.buildRep(1000, null, "参数错误");
 		}
-		// FilenameUtils.getExtension(""):取到一个文件的后缀名
-		String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-		// group1:指storage服务器的组名
-		StorePath uploadFile;
+		OutputStream out = null;
 		try {
-			uploadFile = storageClient.uploadFile("group1", file.getInputStream(), file.getSize(), extension);
+			for (MultipartFile file : files) {
+				String originalFilename = file.getOriginalFilename();
+				if (originalFilename == null) {
+					continue;
+				}
+				String[] split = originalFilename.split("\\.");
+				if (split.length < 2) {
+					continue;
+				}
+				String fileName = UUIDUtil.uuid() + "." + split[1];
+				String path = "d:"+File.separator+"dxg"+File.separator+"images"+File.separator + fileName;
+				File newFile = new File(path);
+				newFile.createNewFile();
+				out = new FileOutputStream(newFile);
+				out.write(file.getBytes());
+			}
 		} catch (IOException e) {
-			return ApiResponse.buildRep(1000, null, e.getMessage());
+			throw new IOException(e.getMessage());
+		} finally {
+			out.close();
 		}
-		// 返回它在storage容器的的路径
-		String path = uploadFile.getFullPath();
-		return ApiResponse.buildRightRep(path, "成功");
+		return ApiResponse.buildRightRep(null, "成功");
 	}
 	
 }
