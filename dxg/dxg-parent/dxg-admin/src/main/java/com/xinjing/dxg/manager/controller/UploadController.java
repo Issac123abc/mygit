@@ -35,7 +35,7 @@ public class UploadController {
 					continue;
 				}
 				String fileName = UUIDUtil.uuid() + "." + split[1];
-				String path = "d:"+File.separator+"dxg"+File.separator+"images"+File.separator + fileName;
+				String path = File.separator+"dxg"+File.separator+"images"+File.separator + fileName;
 				File newFile = new File(path);
 				newFile.createNewFile();
 				out = new FileOutputStream(newFile);

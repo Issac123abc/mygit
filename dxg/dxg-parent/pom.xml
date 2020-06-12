@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<modules>
-		<module>dxg-gateway</module>
+		<module>dxg-getway</module>
 		<module>dxg-config</module>
 		<module>dxg-eureka</module>
 		<module>dxg-common</module>
