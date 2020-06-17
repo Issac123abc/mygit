@@ -41,8 +41,8 @@ public class TableController {
 		return ApiResponse.OK;
 	}
 	
-	@RequestMapping(value = "/getQrCode", method = RequestMethod.GET)
-	public void getQrCode(HttpServletResponse response) throws IOException {
+	@RequestMapping(value = "/getCode", method = RequestMethod.GET)
+	public void getCode(HttpServletResponse response) throws IOException {
 		// 二维码内的信息
 		String info = "This is my first QR Code";
 		byte[] qrcode = null;
@@ -60,9 +60,9 @@ public class TableController {
 		outputStream.close();
 	}
 	
-	@RequestMapping(value = "/getProductFromQrCode", method = RequestMethod.GET)
-	public ApiResponse getProductFromQrCode(){
-		
-		return null;
-	}
+//	@RequestMapping(value = "/scanCode", method = RequestMethod.GET)
+//	public ApiResponse scanCode(){
+//		
+//		return null;
+//	}
 }

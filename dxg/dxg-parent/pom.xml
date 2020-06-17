@@ -8,6 +8,7 @@
 		<module>dxg-eureka</module>
 		<module>dxg-common</module>
         <module>dxg-admin</module>
+		<module>dxg-user</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

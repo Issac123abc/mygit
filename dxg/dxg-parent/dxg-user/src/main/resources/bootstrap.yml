@@ -1,0 +1,49 @@
+spring:
+  profiles:
+    active: test
+
+---
+spring:
+  profiles: dev
+  application:
+    name: user
+  cloud:
+    config:
+      enabled: true
+      profile: dev
+      label: ""
+      username: root
+      password: 123456
+      discovery:
+        enabled: true
+        service-id: dxg-config
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@localhost:8000/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+---
+spring:
+  profiles: test
+  application:
+    name: user
+  cloud:
+    config:
+      enabled: true
+      profile: test
+      label: ""
+      username: root
+      password: 123456
+      discovery:
+        enabled: true
+        service-id: dxg-config
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@localhost:8000/eureka
+    register-with-eureka: true
+    fetch-registry: true
