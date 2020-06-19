@@ -21,7 +21,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://root:123456@localhost:8000/eureka
+      defaultZone: http://root:123456@localhost:8100/eureka
     register-with-eureka: true
     fetch-registry: true
 
@@ -40,10 +40,11 @@ spring:
       discovery:
         enabled: true
         service-id: dxg-config
+      name: admin
 
 eureka:
   client:
     service-url:
-      defaultZone: http://root:123456@localhost:8000/eureka
+      defaultZone: http://root:123456@localhost:8100/eureka
     register-with-eureka: true
     fetch-registry: true

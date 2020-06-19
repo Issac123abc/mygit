@@ -21,7 +21,7 @@ spring:
                 fallback-uri: forward:/fallback  #断路器回调方法
   redis:
      database: 1
-     host: 106.52.60.213
+     host: 192.168.122.132
      port: 6379
      timeout: 1000
      #password:
