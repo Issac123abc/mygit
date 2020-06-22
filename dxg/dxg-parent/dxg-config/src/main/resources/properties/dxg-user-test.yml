@@ -1,13 +1,8 @@
 server:
    port: 8600
-   servlet:
-     context-path: /dxg-user
 spring:
    application:
      name: dxg-user
-   http: 
-     multipart: 
-       max-file-size: 100000
    datasource:
      username: root
      password: 123456

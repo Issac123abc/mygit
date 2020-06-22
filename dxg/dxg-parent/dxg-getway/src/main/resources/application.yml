@@ -1,7 +1,5 @@
 server:
   port: 8300
-  servlet:
-    context-path: /dxg-getway
 spring:
   application:
     name: dxg-getway

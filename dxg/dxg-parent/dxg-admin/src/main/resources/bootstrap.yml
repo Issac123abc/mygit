@@ -1,0 +1,26 @@
+server:
+   port: 8500
+   servlet:
+     context-path: /dxg-admin
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://root:123456@localhost:8100/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+spring:
+  application:
+    name: dxg-admin
+  cloud:
+    config:
+      enabled: true
+      profile: test
+      label: ""
+      username: root
+      password: 123456
+      discovery:
+        enabled: true
+        service-id: dxg-config
+                
