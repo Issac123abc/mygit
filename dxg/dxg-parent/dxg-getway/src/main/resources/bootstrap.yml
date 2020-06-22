@@ -6,7 +6,7 @@ spring:
 spring:
   profiles: dev
   application:
-    name: dxg-user
+    name: dxg-getway
   cloud:
     config:
       enabled: true
@@ -29,7 +29,7 @@ eureka:
 spring:
   profiles: test
   application:
-    name: dxg-user
+    name: dxg-getway
   cloud:
     config:
       enabled: true

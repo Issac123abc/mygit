@@ -13,14 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.zxing.WriterException;
 import com.xinjing.dxg.common.ApiResponse;
+import com.xinjing.dxg.common.BaseController;
+import com.xinjing.dxg.common.PageData;
 import com.xinjing.dxg.common.utils.QrCodeUtil;
 import com.xinjing.dxg.common.utils.RedisUtil;
 import com.xinjing.dxg.common.utils.StringUtil;
+import com.xinjing.dxg.table.entity.TableInfo;
 import com.xinjing.dxg.table.service.TableService;
 
 @RequestMapping("/table")
 @RestController
-public class TableController {
+public class TableController extends BaseController {
 	
 	@Autowired
 	private TableService tableService;
@@ -35,9 +38,11 @@ public class TableController {
 	}
 	
 	@RequestMapping(value = "/getPageList", method = RequestMethod.GET)
-	public ApiResponse getPageList(){
-		
-		return null;
+	public ApiResponse<PageData<TableInfo>> getPageList(HttpServletRequest request){
+		String token = request.getParameter("token");
+		String userId = RedisUtil.get(token);
+		PageData<TableInfo> pageList = tableService.getPageList(userId, getPagerParam(request));
+		return ApiResponse.buildRightRep(pageList, "成功");
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
