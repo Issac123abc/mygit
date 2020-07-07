@@ -16,7 +16,7 @@ spring:
   cloud:
     config:
       enabled: true
-      profile: test
+      profile: dev
       label: ""
       username: root
       password: 123456

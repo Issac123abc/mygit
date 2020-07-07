@@ -28,6 +28,9 @@ public class TableInfo {
 	
 	@Column(name = "updateTime")
 	private Date updateTime;
+	
+	@Column(name = "user_id")
+	private String userId;
 
 	public String getId() {
 		return id;
@@ -75,5 +78,13 @@ public class TableInfo {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }
