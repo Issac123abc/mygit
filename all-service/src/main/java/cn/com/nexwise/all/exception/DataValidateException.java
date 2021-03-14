@@ -1,4 +1,4 @@
-package cn.com.nexwise.security.common.exception;
+package cn.com.nexwise.all.exception;
 
 /**
  * 数据验证异常类
